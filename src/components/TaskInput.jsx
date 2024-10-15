@@ -3,12 +3,14 @@ import AddTaskButton from './AddTaskButton';
 import "../styles/styles.css"
 
 const TaskInput = ({ onAddTask }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleAddTask = () => {
-    if (inputValue.trim()) {
-      onAddTask(inputValue);
-      setInputValue('');
+    if (title.trim() && description.trim()) {
+      onAddTask(title, description);
+      setTitle('');
+      setDescription('');
     }
   };
 
@@ -16,9 +18,16 @@ const TaskInput = ({ onAddTask }) => {
     <div className="task-input-container">
       <input
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Enter a task"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Enter task title"
+        className="task-input"
+      />
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Enter task description"
         className="task-input"
       />
       <AddTaskButton onClick={handleAddTask} />

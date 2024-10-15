@@ -4,11 +4,10 @@ import TaskItem from './TaskItem';
 const TaskList = ({ tasks, onRemoveTask, onEditTask }) => {
   return (
     <ul>
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <TaskItem
-          key={index}
-          task={task}
-          index={index}
+          key={task.id} 
+          task={task} 
           onRemoveTask={onRemoveTask}
           onEditTask={onEditTask}
         />

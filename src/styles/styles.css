@@ -97,3 +97,22 @@ ul {
 .task-item:hover {
     background-color: #f8f9fa;
 }
+
+
+.edit-input {
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.submit-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+
+}

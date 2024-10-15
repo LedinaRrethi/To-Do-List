@@ -1,5 +1,5 @@
 import React from 'react';
-import {  FaTrashAlt } from 'react-icons/fa';  
+import { FaTrashAlt } from 'react-icons/fa';  
 
 const RemoveTaskButton = ({ onClick }) => {
   return (

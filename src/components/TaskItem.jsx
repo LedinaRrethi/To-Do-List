@@ -3,35 +3,52 @@ import { FaEdit } from 'react-icons/fa';
 import RemoveTaskButton from './RemoveTaskButton'; 
 import "../styles/styles.css"
 
-const TaskItem = ({ task, index, onRemoveTask, onEditTask }) => {
+const TaskItem = ({ task, onRemoveTask, onEditTask }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTask, setEditedTask] = useState(task);
+  const [editedTask, setEditedTask] = useState({ title: task.title, description: task.description });
 
-  const handleEdit = () => {
+  const handleEditToggle = () => {
     setIsEditing(!isEditing);
     if (isEditing) {
-      onEditTask(index, editedTask);
+      onEditTask(task.id, editedTask);
     }
+  };
+
+  const handleSubmitEdit = (e) => {
+    e.preventDefault(); 
+    onEditTask(task.id, editedTask);
+    setIsEditing(false); 
   };
 
   return (
     <li className="task-item">
       {isEditing ? (
-        <input
-          type="text"
-          value={editedTask}
-          onChange={(e) => setEditedTask(e.target.value)}
-          className="edit-input"
-        />
+        <form onSubmit={handleSubmitEdit}>
+          <input
+            type="text"
+            value={editedTask.title}
+            onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })}
+            className="edit-input"
+            required
+          />
+          <input
+            type="text"
+            value={editedTask.description}
+            onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })}
+            className="edit-input"
+            required
+          />
+          <button type="submit" className="submit-button">Submit</button> {/* Submit button */}
+        </form>
       ) : (
-        <span className="task-text">{task}</span>
+        <span className="task-text">{task.title}: {task.description}</span>
       )}
 
-      <button className="icon-button edit-button" onClick={handleEdit}>
+      <button className="icon-button edit-button" onClick={handleEditToggle}>
         <FaEdit />
       </button>
     
-      <RemoveTaskButton onClick={() => onRemoveTask(index)} />
+      <RemoveTaskButton onClick={() => onRemoveTask(task.id)} />
     </li>
   );
 };

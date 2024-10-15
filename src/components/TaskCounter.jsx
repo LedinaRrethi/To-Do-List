@@ -5,4 +5,3 @@ const TaskCounter = ({ taskCount }) => {
 };
 
 export default TaskCounter;
-
