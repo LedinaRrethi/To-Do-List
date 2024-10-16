@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AddTaskButton from './AddTaskButton';
 import "../styles/styles.css"
 
-const TaskInput = ({ onAddTask }) => {
+const TaskInput = ({ onAddTask, taskInputRef }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
@@ -11,6 +11,7 @@ const TaskInput = ({ onAddTask }) => {
       onAddTask(title, description);
       setTitle('');
       setDescription('');
+      taskInputRef.current.focus(); 
     }
   };
 
@@ -22,6 +23,7 @@ const TaskInput = ({ onAddTask }) => {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Enter task title"
         className="task-input"
+        ref={taskInputRef} 
       />
       <input
         type="text"
