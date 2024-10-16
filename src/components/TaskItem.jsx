@@ -3,7 +3,7 @@ import { FaEdit } from 'react-icons/fa';
 import RemoveTaskButton from './RemoveTaskButton'; 
 import "../styles/styles.css"
 
-const TaskItem = ({ task, onRemoveTask, onEditTask }) => {
+const TaskItem = ({ task, onRemoveTask, onEditTask, onToggleComplete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState({ title: task.title, description: task.description });
 
@@ -22,6 +22,11 @@ const TaskItem = ({ task, onRemoveTask, onEditTask }) => {
 
   return (
     <li className="task-item">
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() => onToggleComplete(task.id)}
+      />
       {isEditing ? (
         <form onSubmit={handleSubmitEdit}>
           <input
@@ -38,7 +43,7 @@ const TaskItem = ({ task, onRemoveTask, onEditTask }) => {
             className="edit-input"
             required
           />
-          <button type="submit" className="submit-button">Submit</button> {/* Submit button */}
+          <button type="submit" className="submit-button">Submit</button>
         </form>
       ) : (
         <span className="task-text">{task.title}: {task.description}</span>
