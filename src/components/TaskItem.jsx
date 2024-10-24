@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { FaEdit } from 'react-icons/fa';  
-import RemoveTaskButton from './RemoveTaskButton'; 
-import "../styles/styles.css"
+import { FaEdit } from 'react-icons/fa';
+import RemoveTaskButton from './RemoveTaskButton';
+import EditTaskInput from './EditTaskInput';
+import '../styles/styles.css';
 
 const TaskItem = ({ task, onRemoveTask, onEditTask, onToggleComplete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState({ title: task.title, description: task.description });
 
   const handleEditToggle = () => {
-    setIsEditing(!isEditing);
-    if (isEditing) {
-      onEditTask(task.id, editedTask);
-    }
+    setIsEditing(!isEditing); 
   };
 
   const handleSubmitEdit = (e) => {
-    e.preventDefault(); 
-    onEditTask(task.id, editedTask);
+    e.preventDefault();
+    onEditTask(task.id, editedTask); 
     setIsEditing(false); 
   };
 
@@ -29,13 +27,7 @@ const TaskItem = ({ task, onRemoveTask, onEditTask, onToggleComplete }) => {
       />
       {isEditing ? (
         <form onSubmit={handleSubmitEdit}>
-          <input
-            type="text"
-            value={editedTask.title}
-            onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })}
-            className="edit-input"
-            required
-          />
+          <EditTaskInput task={editedTask} onEditTask={(newTitle) => setEditedTask({ ...editedTask, title: newTitle })} />
           <input
             type="text"
             value={editedTask.description}
@@ -48,11 +40,9 @@ const TaskItem = ({ task, onRemoveTask, onEditTask, onToggleComplete }) => {
       ) : (
         <span className="task-text">{task.title}: {task.description}</span>
       )}
-
       <button className="icon-button edit-button" onClick={handleEditToggle}>
         <FaEdit />
       </button>
-    
       <RemoveTaskButton onClick={() => onRemoveTask(task.id)} />
     </li>
   );

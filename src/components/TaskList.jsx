@@ -10,7 +10,7 @@ const TaskList = ({ tasks, onRemoveTask, onEditTask, onToggleComplete }) => {
           task={task}
           onRemoveTask={onRemoveTask}
           onEditTask={onEditTask}
-          onToggleComplete={onToggleComplete} 
+          onToggleComplete={onToggleComplete}
         />
       ))}
     </ul>

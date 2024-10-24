@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AddTaskButton from './AddTaskButton';
-import "../styles/styles.css"
+import '../styles/styles.css';
 
 const TaskInput = ({ onAddTask, taskInputRef }) => {
   const [title, setTitle] = useState('');
@@ -8,7 +8,7 @@ const TaskInput = ({ onAddTask, taskInputRef }) => {
 
   const handleAddTask = () => {
     if (title.trim() && description.trim()) {
-      onAddTask(title, description);
+      onAddTask(title, description); 
       setTitle('');
       setDescription('');
       taskInputRef.current.focus(); 
@@ -24,6 +24,7 @@ const TaskInput = ({ onAddTask, taskInputRef }) => {
         placeholder="Enter task title"
         className="task-input"
         ref={taskInputRef} 
+        required
       />
       <input
         type="text"
@@ -31,6 +32,7 @@ const TaskInput = ({ onAddTask, taskInputRef }) => {
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Enter task description"
         className="task-input"
+        required
       />
       <AddTaskButton onClick={handleAddTask} />
     </div>
